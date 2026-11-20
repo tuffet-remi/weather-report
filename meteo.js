@@ -1,10 +1,14 @@
+const city = document.getElementById("city");
+const tmp = document.getElementById("tmp");
+
 fetch("conf.json")
     .then(response => response.json())
     .then(data => {
         console.log(data);
-
+        const ville = data.ville;
+        city.textContent = ville;
         fetch("https://geocoding-api.open-meteo.com/v1/search?name="
-        + data.ville
+        + ville
         + "&count=1&language=fr&format=json")
         .then(response => response.json())
         .then(geo => {
@@ -22,6 +26,11 @@ fetch("conf.json")
                 .then(response => response.json())
                 .then(weather => {
                     console.log(weather);
+                    const temperature = weather.current.temperature_2m + " " + weather.current_units.temperature_2m;
+                    tmp.textContent = temperature;
                 });
         });
     });
+
+
+    
