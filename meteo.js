@@ -3,6 +3,7 @@ const tmp = document.getElementById("tmp");
 const relhum = document.getElementById("relhum");
 const wcode = document.getElementById("wcode");
 const icons = document.getElementById("icons");
+const time = document.getElementById("time"); 
 
 const weather_def = {
 	"0": "Ciel dégagé",
@@ -99,12 +100,17 @@ function update_meteo() {
                         const humidity = weather.current.relative_humidity_2m + "%";
                         relhum.textContent = humidity;
                         const code = weather.current.weather_code;
-                        const description = weather_def[code] || "Météo indisponible"
+                        const description = weather_def[code] || "Météo indisponible";
                         wcode.textContent = description;
                         const wicons = weather_icon[code] || "icons/not-available.svg";
                         icons.src = wicons;
                         icons.alt = description;
+                        const timestring = new Date().toLocaleTimeString();
+                        time.textContent = timestring;
                     });
             });
         });
 }
+
+update_meteo();
+setInterval(update_meteo, 60*60*1000);
