@@ -2,19 +2,39 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Météo</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
       <div class="card">
         <div class="weather">
-            <h1 id="city"></h1>
+          <div class="left">
+            <div class="lieu">
+              <h1 id="city"></h1>
+            </div>
+            <div class="time">
+              <p>dernière mise à jour</p>
+              <p id="time"></p>
+            </div>
+          </div>
+
+          <div class="statut">
             <img id="icons" class="icon">
-            <h2 id="tmp"></h2>
-            <h2 id="relhum"></h2>
-            <h2 id="wcode"></h2>
-            <img src="icons/thermometer.svg" class="icon">
-            <img src="icons/raindrop.svg" class="icon">
+            <p id="wcode"></p>
+          </div>
+
+          <div class="right">
+            <div class="temperature">
+              <p id="tmp"></p>
+              <img src="icons/thermometer.svg" class="icon" alt="Température">
+            </div>
+            <div class="humidity">
+              <p id="relhum"></p>  
+              <img src="icons/raindrop.svg" class="icon" alt="Humidité">
+            </div>
+          </div>
         </div>
     </div>
     <script src="meteo.js"></script>

@@ -97,7 +97,7 @@ function update_meteo() {
                         console.log(weather);
                         const temperature = weather.current.temperature_2m + " " + weather.current_units.temperature_2m;
                         tmp.textContent = temperature;
-                        const humidity = weather.current.relative_humidity_2m + "%";
+                        const humidity = weather.current.relative_humidity_2m + " %";
                         relhum.textContent = humidity;
                         const code = weather.current.weather_code;
                         const description = weather_def[code] || "Météo indisponible";

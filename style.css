@@ -1,0 +1,60 @@
+@font-face {
+    font-family: "Sansation";
+    src: url("fonts/Sansation_Light.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Sansation";
+    src: url("fonts/Sansation_Bold.ttf");
+    font-weight: 700;
+}
+
+body {
+    margin: 0;
+    font-family: "Sansation", sans-serif;
+    background-color: #220738;
+    color: #dde5ef;
+}
+
+h1, p {
+    margin: 0;
+}
+
+.weather {
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.statut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.temperature,
+.time,
+.humidity {
+    display: flex;
+    align-items: center;
+}
+
+#city    { 
+    font-size: 10vh;
+    transform: translateY(-30vh); 
+}
+
+.time     { 
+    font-size: 3.5vh; 
+    transform: translateY(30vh);
+}
+
+#icons   { width: 60vh; }
+#wcode   { font-size: 10vh; }
+
+.temperature .icon { width: 30vh; }
+.humidity .icon { width: 30vh; }
+#tmp     { font-size: 8vh; }
+#relhum  { font-size: 8vh; }
