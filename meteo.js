@@ -4,6 +4,7 @@ const relhum = document.getElementById("relhum");
 const wcode = document.getElementById("wcode");
 const icons = document.getElementById("icons");
 const time = document.getElementById("time"); 
+const wind = document.getElementById("wind"); 
 
 const weather_def = {
 	"0": "Ciel dégagé",
@@ -91,14 +92,16 @@ function update_meteo() {
                     + latitude
                     + "&longitude="
                     + longitude
-                    + "&current=temperature_2m,weather_code,relative_humidity_2m&timezone=Europe/Paris")
+                    + "&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m&timezone=Europe/Paris")
                     .then(response => response.json())
                     .then(weather => {
                         console.log(weather);
-                        const temperature = weather.current.temperature_2m + " " + weather.current_units.temperature_2m;
+                        const temperature = weather.current.temperature_2m.toLocaleString("fr-FR") + weather.current_units.temperature_2m;
                         tmp.textContent = temperature;
                         const humidity = weather.current.relative_humidity_2m + " %";
                         relhum.textContent = humidity;
+						const windspeed = weather.current.wind_speed_10m.toLocaleString("fr-FR") + " " + weather.current_units.wind_speed_10m;
+                        wind.textContent = windspeed;
                         const code = weather.current.weather_code;
                         const description = weather_def[code] || "Météo indisponible";
                         wcode.textContent = description;

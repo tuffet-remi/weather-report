@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Sansation";
-    src: url("fonts/Sansation_Light.ttf");
+    src: url("fonts/Sansation_Regular.ttf");
     font-weight: 400;
 }
 
@@ -13,8 +13,34 @@
 body {
     margin: 0;
     font-family: "Sansation", sans-serif;
-    background-color: #220738;
-    color: #dde5ef;
+    background-color: #130f40;
+    color: #dff9fb;
+}
+
+.left, 
+.statut, 
+.right {
+    flex: 1;
+}
+
+.left {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10vh 0;
+    padding-left: 4vw;
+    box-sizing: border-box;
+}
+
+.right {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18vh 0;
+    box-sizing: border-box;
+    align-items: center;
 }
 
 h1, p {
@@ -34,27 +60,35 @@ h1, p {
     align-items: center;
 }
 
-.temperature,
-.time,
-.humidity {
+.wind, .humidity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.temperature {
     display: flex;
     align-items: center;
 }
 
 #city    { 
-    font-size: 10vh;
-    transform: translateY(-30vh); 
+    font-size: 8vh;
 }
 
 .time     { 
-    font-size: 3.5vh; 
-    transform: translateY(30vh);
+    font-size: 3vh; 
+    display: flex;
+    flex-direction: column;
 }
 
 #icons   { width: 60vh; }
-#wcode   { font-size: 10vh; }
+#wcode   { font-size: 6vh; }
+#tmp     { font-size: 13vh; }
+#relhum, #wind  { font-size: 6vh; }
 
-.temperature .icon { width: 30vh; }
-.humidity .icon { width: 30vh; }
-#tmp     { font-size: 8vh; }
-#relhum  { font-size: 8vh; }
+.temperature .icon, 
+.humidity .icon, 
+.wind .icon { 
+    width: 20vh; 
+}
+
