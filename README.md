@@ -68,6 +68,7 @@ Avec l'extension **Live Server** de VS Code : clic droit sur `index.html` puis �
 - Gérer les erreurs (API indisponible, ville introuvable) avec un message clair
 - Réécrire les appels avec `async` / `await` pour un code plus lisible
 - Rafraîchir plus souvent, l'API mettant ses données à jour toutes les 15 minutes
+- Ralentir la vitesse des animations (voir Docs du site Meteocons)
 - Adapter l'affichage à d'autres formats d'écran, comme les écrans verticaux
 - Ajouter des tests automatisés et une intégration continue
 
