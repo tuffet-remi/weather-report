@@ -75,6 +75,12 @@ h1, p {
     font-size: 8vh;
 }
 
+#erreur {
+    font-size: 4vh;
+    color: #ffb3b3;
+    text-align: center;
+}
+
 .time     { 
     font-size: 3vh; 
     display: flex;

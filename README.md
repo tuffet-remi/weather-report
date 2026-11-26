@@ -13,6 +13,8 @@ Projet réalisé pour la préparation à la journée de sélection du parcours C
 - Mise à jour automatique des données toutes les heures
 - Heure de la dernière mise à jour affichée à l'écran
 - Texte et icône de secours si le code météo est inconnu
+- Gestion des erreurs : fichier de configuration illisible ou incomplet, ville introuvable, API indisponible, avec un message clair à l'écran
+- Encodage du nom de ville dans l'adresse de l'API
 
 ## Technologies
 
@@ -56,6 +58,18 @@ Avec l'extension **Live Server** de VS Code : clic droit sur `index.html` puis �
 4. Les données sont affichées dans la page, et le code météo (norme OMM) est traduit en texte et en pictogramme.
 5. L'opération se répète toutes les heures grâce à `setInterval`.
 
+## Tests réalisés
+
+| Cas testé | Méthode | Résultat attendu | Résultat obtenu |
+|---|---|---|---|
+| Ville valide | `{ "ville": "Montpellier" }` | Météo affichée, aucun message d'erreur | ✅ Conforme |
+| Nom composé et accentué | `{ "ville": "Saint-Étienne" }` | Météo de Saint-Étienne affichée | ✅ Conforme |
+| Ville inexistante | `{ "ville": "testabc" }` | Message « Ville introuvable : testabc » | ✅ Conforme |
+| Configuration sans ville | `{}` | Message « Aucune ville définie dans le fichier de configuration » | ✅ Conforme |
+| Fichier de configuration absent | Renommage de `conf.json` | Message « Impossible de lire le fichier de configuration » | ✅ Conforme |
+| Connexion coupée | Mode « Offline » des outils de développement | Message d'erreur affiché à l'écran | ✅ Conforme |
+| Retour à la normale | Correction de la configuration | Message d'erreur effacé, météo affichée | ✅ Conforme |
+
 ## Choix techniques
 
 - **Icônes et police hébergées dans le projet** : l'affichage ne dépend pas d'un service externe, ce qui est plus fiable pour des écrans installés dans les transports.
@@ -65,7 +79,7 @@ Avec l'extension **Live Server** de VS Code : clic droit sur `index.html` puis �
 
 ## Améliorations possibles
 
-- Gérer les erreurs (API indisponible, ville introuvable) avec un message clair
+- Conserver les dernières données affichées en cas d'échec d'une mise à jour, avec un avertissement
 - Réécrire les appels avec `async` / `await` pour un code plus lisible
 - Rafraîchir plus souvent, l'API mettant ses données à jour toutes les 15 minutes
 - Ralentir la vitesse des animations (voir Docs du site Meteocons)
