@@ -71,28 +71,27 @@ h1, p {
     align-items: center;
 }
 
-#city    { 
+#cityElement    { 
     font-size: 8vh;
 }
 
-#erreur {
+#errorElement {
     font-size: 4vh;
     color: #ffb3b3;
     text-align: center;
 }
 
-.time     { 
+.timeElement     { 
     font-size: 3vh; 
     display: flex;
     flex-direction: column;
 }
 
 #icons   { width: 60vh; }
-#wcode   { font-size: 6vh; }
-#tmp     { font-size: 13vh; }
-#relhum, #wind  { font-size: 6vh; }
+#weatherStateElement   { font-size: 6vh; }
+#temperatureElement     { font-size: 13vh; }
+#humidityElement, #windElement  { font-size: 6vh; }
 
-.temperature .icon, 
 .humidity .icon, 
 .wind .icon { 
     width: 20vh; 

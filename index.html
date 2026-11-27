@@ -12,35 +12,37 @@
       <div class="card">
         <div class="weather">
           <div class="left">
-            <h1 id="city"></h1>
+            <h1 id="cityElement"></h1>
             <div class="time">
               <p>Dernière mise à jour :</p>
-              <p id="time"></p>
+              <p id="timeElement"></p>
             </div>
           </div>
 
           <div class="statut">
-            <img id="icons" class="icon" alt="">
-            <p id="wcode"></p>
-            <p id="erreur"></p>
+            <img id="iconElement" class="icon" alt="">
+            <p id="weatherStateElement"></p>
+            <p id="errorElement"></p>
             <div class="temperature">
-              <p id="tmp"></p>
+              <p id="temperatureElement"></p>
             <!--  <img src="icons/thermometer.svg" class="icon" alt="Température"> -->
             </div>
           </div>
 
           <div class="right">
             <div class="humidity">
-              <p id="relhum"></p>  
+              <p id="humidityElement"></p>  
               <img src="icons/raindrop.svg" class="icon" alt="Humidité">
             </div>
             <div class="wind">
-              <p id="wind"></p>  
-              <img src="icons/wind.svg" class="icon" alt="Vitesse du vent">
+              <p id="windElement"></p>  
+              <div id="wind-anim" class="icon"></div>
+              <!-- <img src="icons/wind.svg" class="icon" alt="Vitesse du vent"> -->
             </div>
           </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script src="meteo.js"></script>
 </body>
 </html>
