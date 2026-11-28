@@ -58,6 +58,21 @@ Avec l'extension **Live Server** de VS Code : clic droit sur `index.html` puis �
 4. Les données sont affichées dans la page, et le code météo (norme OMM) est traduit en texte et en pictogramme.
 5. L'opération se répète toutes les heures grâce à `setInterval`.
 
+## Architecture
+
+Le code est découpé en fonctions qui ont chacune un seul rôle :
+
+| Fonction | Rôle |
+|---|---|
+| `readConfig()` | Lit le fichier `conf.json` et renvoie le nom de la ville |
+| `findCoordinates(city)` | Convertit le nom de la ville en coordonnées GPS (API de géocodage) |
+| `fetchWeather(latitude, longitude)` | Récupère les données météo et les renvoie dans un format simplifié |
+| `displayWeather(city, weather)` | Met à jour l'affichage de la page |
+| `displayError(error)` | Affiche un message d'erreur clair à l'écran |
+| `updateWeather()` | Enchaîne les étapes et gère les erreurs avec `try … catch` |
+
+Les fonctions de récupération des données ne modifient jamais la page, et la fonction d'affichage ne connaît pas le format de l'API. Si l'API changeait de format, seule `fetchWeather` serait à adapter.
+
 ## Tests réalisés
 
 | Cas testé | Méthode | Résultat attendu | Résultat obtenu |
@@ -80,7 +95,6 @@ Avec l'extension **Live Server** de VS Code : clic droit sur `index.html` puis �
 ## Améliorations possibles
 
 - Conserver les dernières données affichées en cas d'échec d'une mise à jour, avec un avertissement
-- Réécrire les appels avec `async` / `await` pour un code plus lisible
 - Rafraîchir plus souvent, l'API mettant ses données à jour toutes les 15 minutes
 - Ralentir la vitesse des animations (voir Docs du site Meteocons)
 - Adapter l'affichage à d'autres formats d'écran, comme les écrans verticaux
