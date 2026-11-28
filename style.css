@@ -88,7 +88,7 @@ h1, p {
 }
 
 #icons   { width: 60vh; }
-#weatherStateElement   { font-size: 6vh; }
+#weatherStateElement   { font-size: 6vh; text-align: center; }
 #temperatureElement     { font-size: 13vh; }
 #humidityElement, #windElement  { font-size: 6vh; }
 

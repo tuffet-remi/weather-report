@@ -1,4 +1,5 @@
 # Weather Report : la météo dans les transports en commun
+![Tests](https://github.com/tuffet-remi/weather-report/actions/workflows/tests.yml/badge.svg)
 
 **Voir le projet en ligne :** https://tuffet-remi.github.io/weather-report/
 
@@ -10,6 +11,8 @@ Projet réalisé pour la préparation à la journée de sélection du parcours C
 - Affichage de la météo actuelle de la ville définie dans un fichier de configuration
 - Température, description du temps, humidité et vitesse du vent
 - Pictogramme adapté aux conditions météo
+- Pictogramme adapté au cycle jour/nuit
+- Animation du pictogramme dont la vitesse suit la vitesse réelle du vent
 - Mise à jour automatique des données toutes les heures
 - Heure de la dernière mise à jour affichée à l'écran
 - Texte et icône de secours si le code météo est inconnu
@@ -19,18 +22,25 @@ Projet réalisé pour la préparation à la journée de sélection du parcours C
 ## Technologies
 
 - HTML, CSS et JavaScript, sans framework
+- Lottie : animation de l'icône du vent
+- Node.js, GitHub Actions et GitHub Pages
 - API [Open-Meteo](https://open-meteo.com/) : géocodage et prévisions météo, gratuite et sans clé d'API
 
 ## Structure du projet
 
 ```
 weather-report/
-├── index.html    → structure de la page
-├── style.css     → mise en forme
-├── meteo.js      → récupération et affichage des données
-├── conf.json     → configuration de la ville
-├── icons/        → pictogrammes météo
-└── fonts/        → police Sansation
+├── index.html           → structure de la page
+├── style.css            → mise en forme
+├── meteo.js             → récupération et affichage des données
+├── weather-utils.js     → fonctions de calcul : traduction des codes météo, vitesse de l'animation
+├── conf.json            → configuration de la ville
+├── package.json         → configuration du projet et commande de test
+├── ACCESSIBILITY.md     → engagements et limites d'accessibilité
+├── icons/               → pictogrammes météo
+├── fonts/               → police Sansation
+├── .github/workflows/   → intégration continue
+└── tests/               → tests automatisés
 ```
 
 ## Configuration
@@ -70,8 +80,11 @@ Le code est découpé en fonctions qui ont chacune un seul rôle :
 | `displayWeather(city, weather)` | Met à jour l'affichage de la page |
 | `displayError(error)` | Affiche un message d'erreur clair à l'écran |
 | `updateWeather()` | Enchaîne les étapes et gère les erreurs avec `try … catch` |
+| `getWeatherInfo(code, isDay)` | Traduit un code météo en texte et en icône, de jour ou de nuit |
+| `computeAnimationSpeed(wind)` | Convertit la vitesse du vent en un multiplicateur pour l'animation |
 
 Les fonctions de récupération des données ne modifient jamais la page, et la fonction d'affichage ne connaît pas le format de l'API. Si l'API changeait de format, seule `fetchWeather` serait à adapter.
+`weather-utils.js` contient les fonctions pures et testables, `meteo.js` tout ce qui touche au réseau et à la page.
 
 ## Tests réalisés
 
@@ -85,23 +98,37 @@ Les fonctions de récupération des données ne modifient jamais la page, et la 
 | Connexion coupée | Mode « Offline » des outils de développement | Message d'erreur affiché à l'écran | ✅ Conforme |
 | Retour à la normale | Correction de la configuration | Message d'erreur effacé, météo affichée | ✅ Conforme |
 
+## Tests unitaires
+
+Les fonctions de calcul sont isolées dans `weather-utils.js` et testées automatiquement avec le lanceur de tests intégré à Node.js.
+
+- `getWeatherInfo` : code connu de jour et de nuit, code sans icône de nuit, code inconnu
+- `computeAnimationSpeed` : vent nul, vent moyen, vent maximal, vent au-delà du maximum
+
+Lancer les tests en local : `npm test` (Node.js requis).
+
+Les tests s'exécutent aussi automatiquement à chaque push grâce à GitHub Actions.
+
 ## Choix techniques
 
-- **Icônes et police hébergées dans le projet** : l'affichage ne dépend pas d'un service externe, ce qui est plus fiable pour des écrans installés dans les transports.
+- **Accessibilité** : voir le fichier [ACCESSIBILITY.md](ACCESSIBILITY.md).
+- **Icônes et police hébergées dans le projet** : seule la bibliothèque d'animation est chargée depuis un CDN (voir les améliorations possibles).
 - **Tailles en unités `vh`** : l'interface s'adapte à la taille de l'écran.
 - **Fort contraste et grandes polices** : l'écran doit être lisible de loin.
 - **Texte alternatif sur les icônes** : pour l'accessibilité.
 
 ## Améliorations possibles
 
-- Conserver les dernières données affichées en cas d'échec d'une mise à jour, avec un avertissement
-- Rafraîchir plus souvent, l'API mettant ses données à jour toutes les 15 minutes
-- Ralentir la vitesse des animations (voir Docs du site Meteocons)
+- Conserver les dernières données affichées en cas d'échec d'une mise à jour avec un avertissement
+- Rafraîchir plus souvent (l'API mettant ses données à jour toutes les 15 minutes)
+- Héberger la bibliothèque Lottie dans le projet ou vérifier son intégrité avec l'attribut `integrity` (SRI)
 - Adapter l'affichage à d'autres formats d'écran, comme les écrans verticaux
-- Ajouter des tests automatisés et une intégration continue
+- Épingler les actions GitHub sur une version figée (identifiant SHA) pour se protéger d'une modification malveillante
+- Arrêter l'animation du vent pour les utilisateurs qui ont activé le réglage « réduire les animations » (`prefers-reduced-motion`)
 
 ## Crédits
 
 - Données météo : [Open-Meteo](https://open-meteo.com/), sous licence CC BY 4.0
 - Icônes : [Meteocons](https://github.com/basmilius/weather-icons) de Bas Milius, sous licence MIT
+- Lottie : Bibliothèque lottie-web, sous licence MIT
 - Police : Sansation de Bernd Montag, sous licence SIL Open Font License
