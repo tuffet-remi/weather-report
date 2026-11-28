@@ -29,7 +29,7 @@ test("Tempête au-delà du maximum : animation à la vitesse maximale", () => {
 
 test("Code 0 en journée : ciel dégagé avec l'icône de jour", () => {
     const result = getWeatherInfo(0, 1);
-    assert.equal(result.text, "Ciel dégagép");
+    assert.equal(result.text, "Ciel dégagé");
     assert.equal(result.icon, "icons/clear-day.svg");
 });
 
